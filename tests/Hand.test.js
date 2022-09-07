@@ -64,7 +64,6 @@ describe("A hand", () => {
 
         describe("when a hand is a flush", () => {
             it("should return true for flush", () => {
-                debugger
                 expect(hand.checkFlush()).toBe(true)
             })
         })
@@ -87,13 +86,108 @@ describe("A hand", () => {
             hand = new Hand()
         })
 
-        describe("when a hand it a straight flush", () => {
+        describe("when a hand is a straight flush", () => {
             it("should return 'Straight Flush'", () => {
-                for (let index = 6; index > 1; index--) {
+                for (let index = 2; index <= 6; index++) {
                     hand.addCard(new Card(index, "CLUBS", `${index}`))
                 }
-                hand.sortHand()
                 expect(hand.scoreHand()).toEqual("Straight Flush")
+            })
+        })
+
+        describe("when a hand is a flush", () => {
+            it("should return 'Flush'", () => {
+                hand.addCard(new Card(2, "CLUBS", `2`))
+                hand.addCard(new Card(3, "CLUBS", `3`))
+                hand.addCard(new Card(4, "CLUBS", `4`))
+                hand.addCard(new Card(5, "CLUBS", `5`))
+                hand.addCard(new Card(7, "CLUBS", `7`))
+
+                expect(hand.scoreHand()).toEqual("Flush")
+            })
+        })
+
+        describe("when a hand is a straight", () => {
+            it("should return 'Straight'", () => {
+                hand.addCard(new Card(2, "CLUBS", `2`))
+                hand.addCard(new Card(3, "CLUBS", `3`))
+                hand.addCard(new Card(4, "CLUBS", `4`))
+                hand.addCard(new Card(5, "CLUBS", `5`))
+                hand.addCard(new Card(6, "HEARTS", `6`))
+
+                expect(hand.scoreHand()).toEqual("Straight")
+            })
+        })
+
+        describe("when a hand is a four of a kind", () => {
+            it("should return 'Four of a Kind'", () => {
+                hand.addCard(new Card(2, "CLUBS", `2`))
+                hand.addCard(new Card(2, "HEARTS", `2`))
+                hand.addCard(new Card(2, "SPADES", `2`))
+                hand.addCard(new Card(2, "DIAMONDS", `2`))
+                hand.addCard(new Card(3, "HEARTS", `3`))
+
+                expect(hand.scoreHand()).toEqual("Four of a Kind")
+            })
+        })
+
+        describe("when a hand is a full house", () => {
+            it("should return 'Full House'", () => {
+                hand.addCard(new Card(2, "CLUBS", `2`))
+                hand.addCard(new Card(2, "DIAMONDS", `2`))
+                hand.addCard(new Card(2, "HEARTS", `2`))
+                hand.addCard(new Card(3, "CLUBS", `3`))
+                hand.addCard(new Card(3, "HEARTS", `3`))
+
+                expect(hand.scoreHand()).toEqual("Full House")
+            })
+        })
+        
+        describe("when a hand is a three of a kind", () => {
+            it("should return 'Three of a Kind'", () => {
+                hand.addCard(new Card(2, "CLUBS", `2`))
+                hand.addCard(new Card(2, "HEARTS", `2`))
+                hand.addCard(new Card(2, "SPADES", `2`))
+                hand.addCard(new Card(4, "DIAMONDS", `4`))
+                hand.addCard(new Card(3, "HEARTS", `3`))
+
+                expect(hand.scoreHand()).toEqual("Three of a Kind")
+            })
+        })
+
+        describe("when a hand is a two pair", () => {
+            it("should return 'Two Pair'", () => {
+                hand.addCard(new Card(2, "CLUBS", `2`))
+                hand.addCard(new Card(2, "HEARTS", `2`))
+                hand.addCard(new Card(4, "SPADES", `4`))
+                hand.addCard(new Card(3, "DIAMONDS", `3`))
+                hand.addCard(new Card(3, "HEARTS", `3`))
+
+                expect(hand.scoreHand()).toEqual("Two Pair")
+            })
+        })
+
+        describe("when a hand is a one pair", () => {
+            it("should return 'One Pair'", () => {
+                hand.addCard(new Card(2, "CLUBS", `2`))
+                hand.addCard(new Card(2, "HEARTS", `2`))
+                hand.addCard(new Card(4, "SPADES", `4`))
+                hand.addCard(new Card(5, "DIAMONDS", `5`))
+                hand.addCard(new Card(6, "HEARTS", `6`))
+
+                expect(hand.scoreHand()).toEqual("One Pair")
+            })
+        })
+
+        describe("when a hand is a high card", () => {
+            it("should return 'High Card'", () => {
+                hand.addCard(new Card(2, "CLUBS", `2`))
+                hand.addCard(new Card(7, "HEARTS", `7`))
+                hand.addCard(new Card(4, "SPADES", `4`))
+                hand.addCard(new Card(5, "DIAMONDS", `5`))
+                hand.addCard(new Card(6, "HEARTS", `6`))
+
+                expect(hand.scoreHand()).toEqual("High Card")
             })
         })
     })

@@ -1,5 +1,4 @@
 import DeckOfCardsClient from "./DeckOfCardsClient.js"
-import Hand from "./Hand.js"
 
 const url = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
 const deckId = await DeckOfCardsClient.getDeck(url)

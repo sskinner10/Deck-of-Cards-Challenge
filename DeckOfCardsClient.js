@@ -3,6 +3,8 @@ import got from "got"
 import Card from "./Card.js"
 import Hand from "./Hand.js"
 
+const aceLowStraight = ['5', '4', '3', '2', 'ACE']
+
 class DeckOfCardsClient {
     static async getDeck(url) {
         try {
@@ -23,6 +25,18 @@ class DeckOfCardsClient {
             const apiResponse = await got(url).json()
 
             const hand = new Hand()
+
+            if (apiResponse.cards.every(card=> aceLowStraight.indexOf(card.value) >= 0)){
+                const ace = apiResponse.cards.find((card) => {
+                    if (card.value === "ACE") {
+                        return true
+                    } 
+
+                    return false
+                })
+
+                ace.value = "ACE LOW"
+            }
             
             apiResponse.cards.forEach((card) => {
                 const rank = card.value
@@ -37,6 +51,8 @@ class DeckOfCardsClient {
                     value = 13
                 } else if (card.value === "ACE") {
                     value = 14
+                } else if (card.value === "ACE LOW") {
+                    value = 1
                 } else {
                     value = parseInt(card.value)
                 }
