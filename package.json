@@ -1,0 +1,22 @@
+{
+  "name": "poker-hand",
+  "version": "1.0.0",
+  "description": "Draw five cards and show the highest value of the hand according to poker rules",
+  "main": "main.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test:debug": "node --inspect-brk ./node_modules/.bin/jest --runInBand"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@babel/core": "^7.19.0",
+    "@babel/preset-env": "^7.19.0",
+    "babel-jest": "^29.0.2",
+    "jest": "^29.0.2"
+  },
+  "dependencies": {
+    "got": "^12.4.1"
+  }
+}
